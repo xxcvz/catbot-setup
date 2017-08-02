@@ -31,4 +31,11 @@
 # TIPS
 
 1. You can run console commands on bots' games. If you are in catbot-setup folder, type `cd cathook-ipc-server/bin`, then you can use either `./exec <bot ID> <command>` or `./exec_all <command>` (will run a command on one bot or all bots, for example `./exec_all say hello` or `./exec 1 kill`
-2. Bots crashed/frozen? Use `./99-kill-everything.sh` to kill all bots/steam instances, stop IPC server and start over from step 14.
+
+# FAQ
+
+### My bots crashed or are frozen.
+Use `./99-kill-everything.sh` to kill all bots/steam instances, stop IPC server and start over from step 14.
+
+### I get error message libGL error: unable to load driver: radeonsi_dri.so
+Use `./97-fix-radeonsi_dri.sh` to remove libstdc++.so.6 and fix the problem.
