@@ -22,7 +22,7 @@
 18. Create Steam accounts (or log in) in these Steam windows
 19. You have to launch Team Fortress 2, open Casual matchmaking menu and **select only those maps for which you have walkbot paths installed (these path files must be named `default`). Bot abandons the game if there is no default path for map.**
 20. Click "Save" button above map selection menu. You can close TF2 now.
-21. `./11-start-games.sh 4` - again, replace `4` with number of bots
+21. `./11-start-games.sh 4` (replace `4` with how many intances of TF2 you want to run, 6 by default)
 22. Wait at least 30 seconds (or a minute)
 23. `./12-inject-cathook.sh`
 24. Bots should work now, check IPC server console to see their status.
