@@ -5,6 +5,11 @@
 #
 
 $max=12
+
+if [ "$#" == 1 ]; then
+	max=$1
+fi
+
 if ! [ -e "/opt/steamapps" ]; then
 	echo "Can't find steamapps folder."
 	echo "Please, run scripts in the right order."
