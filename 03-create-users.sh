@@ -4,7 +4,7 @@
 #	12 is pretty insane amount amount and requires ~18GB ram, but for users who are too lazy to add a number at the end, let's just use the previous as default
 #
 
-$max=12
+max=12
 
 if [ "$#" == 1 ]; then
 	max=$1
