@@ -1,22 +1,27 @@
 #!/usr/bin/env bash
 
-proc=${1:-$(ps $(pidof gameoverlayui) | tail -n1 | cut -d\- -f2 | cut -d\  -f2)}
-if ! [[ $proc =~ ^[0-9]+$ ]]; then
-   echo "Couldn't find process! Are you sure a game is running?" >&2; exit 1
+pushd `dirname $0`
+
+if ! [ $EUID == 0 ]; then
+	echo "This script must be run as root"
+	exit
 fi
 
-sudo rm -rf /tmp/dumps # Remove if it exists
-sudo mkdir /tmp/dumps # Make it as root
-sudo chmod 000 /tmp/dumps # No permissions
+proc=$1
 
-FILENAME="/tmp/.gl$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)"
+echo "Blocking dumps"
 
-cp "cathook/libcathook.so" "$FILENAME"
+rm -rf /tmp/dumps # Remove if it exists
+mkdir /tmp/dumps # Make it as root
+chmod 000 /tmp/dumps # No permissions
+
+FILENAME=$(realpath cathook/libcathook.so)	
 
 echo loading "$FILENAME" to "$proc"
 
-sudo killall -19 steam
-sudo killall -19 steamwebhelper
+#killall -19 steam
+#killall -19 steamwebhelper
+#killall -19 gameoverlayui
 
 gdb -n -q -batch \
   -ex "attach $proc" \
@@ -25,9 +30,12 @@ gdb -n -q -batch \
   -ex "call dlerror()" \
   -ex 'print (char *) $2' \
   -ex "detach" \
-  -ex "quit"
+  -ex "quit" >/tmp/cathook-backtraces/$proc.log
   
 rm $FILENAME
 
-sudo killall -18 steamwebhelper
-sudo killall -18 steam
+#killall -18 steamwebhelper
+#killall -18 gameoverlayui
+#killall -18 steam
+
+popd

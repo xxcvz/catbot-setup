@@ -1,3 +1,6 @@
 cathook-location
 cathook-ipc-server
 cathook/*
+inject.log
+core
+forever/node_modules

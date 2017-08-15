@@ -27,7 +27,7 @@ rm "cathook/libcathook.so"
 pushd "$cathook"
 
 make clean
-make -j$numcpu -e GAME=tf2 TEXTMODE=1 NO_WARNINGS=1 BUILD_DEBUG=1
+make -j$numcpu NO_WARNINGS=1 TEXTMODE_VAC=1 NO_VISUALS=1
 
 if ! [ -e "bin/libcathook.so" ]; then
 	echo "FATAL: Build failed"
