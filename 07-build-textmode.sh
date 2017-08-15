@@ -21,8 +21,8 @@ echo "WARNING: Your current build of cathook will be deleted"
 echo "You will have to re-compile cathook after this"
 read -p "Press enter to continue or Ctrl+C (close) to stop."
 
-mkdir -p "cathook"
-rm "cathook/libcathook.so"
+sudo mkdir -p "/opt/cathook/bin"
+sudo rm "/opt/cathook/bin/libcathook.so"
 
 pushd "$cathook"
 
@@ -36,4 +36,4 @@ fi
 
 popd
 
-cp "$cathook/bin/libcathook.so" cathook
+sudo cp "$cathook/bin/libcathook.so" "/opt/cathook/bin"

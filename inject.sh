@@ -15,9 +15,15 @@ rm -rf /tmp/dumps # Remove if it exists
 mkdir /tmp/dumps # Make it as root
 chmod 000 /tmp/dumps # No permissions
 
-FILENAME=$(realpath cathook/libcathook.so)	
+FILENAME="/opt/cathook/bin/libcathook.so"
 
 echo loading "$FILENAME" to "$proc"
+
+if grep "libcathook.so" "/proc/$proc/maps"
+then
+	echo "Already injected"
+	exit
+fi
 
 #killall -19 steam
 #killall -19 steamwebhelper
