@@ -22,7 +22,7 @@ echo "You will have to re-compile cathook after this"
 read -p "Press enter to continue or Ctrl+C (close) to stop."
 
 sudo mkdir -p "/opt/cathook/bin"
-sudo rm "/opt/cathook/bin/libcathook.so"
+sudo rm "/opt/cathook/bin/libcathook-textmode.so"
 
 pushd "$cathook"
 
@@ -36,4 +36,4 @@ fi
 
 popd
 
-sudo cp "$cathook/bin/libcathook.so" "/opt/cathook/bin"
+sudo cp "$cathook/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"

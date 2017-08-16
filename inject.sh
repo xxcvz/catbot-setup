@@ -9,25 +9,29 @@ fi
 
 proc=$1
 
-echo "Blocking dumps"
-
 rm -rf /tmp/dumps # Remove if it exists
 mkdir /tmp/dumps # Make it as root
 chmod 000 /tmp/dumps # No permissions
 
-FILENAME="/opt/cathook/bin/libcathook.so"
+FILENAME="/opt/cathook/bin/libcathook-textmode.so"
 
 echo loading "$FILENAME" to "$proc"
 
-if grep "libcathook.so" "/proc/$proc/maps"
-then
+echo "$EUID:$USER:$HOME:$proc:$FILENAME" >> inject.log
+
+if grep "cathook" "/proc/$proc/maps"; then
 	echo "Already injected"
+	echo "Already injected!" >> inject.log
 	exit
 fi
+
+mkdir -p /tmp/cathook-backtraces
 
 #killall -19 steam
 #killall -19 steamwebhelper
 #killall -19 gameoverlayui
+
+echo "Injecting..."
 
 gdb -n -q -batch \
   -ex "attach $proc" \
@@ -37,8 +41,6 @@ gdb -n -q -batch \
   -ex 'print (char *) $2' \
   -ex "detach" \
   -ex "quit" >/tmp/cathook-backtraces/$proc.log
-  
-rm $FILENAME
 
 #killall -18 steamwebhelper
 #killall -18 gameoverlayui
