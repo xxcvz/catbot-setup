@@ -21,13 +21,13 @@ echo "WARNING: Your current build of cathook will be deleted"
 echo "You will have to re-compile cathook after this"
 read -p "Press enter to continue or Ctrl+C (close) to stop."
 
-mkdir -p "cathook"
-rm "cathook/libcathook.so"
+sudo mkdir -p "/opt/cathook/bin"
+sudo rm "/opt/cathook/bin/libcathook-textmode.so"
 
 pushd "$cathook"
 
 make clean
-make -j$numcpu -e GAME=tf2 TEXTMODE=1 NO_WARNINGS=1 BUILD_DEBUG=1
+make -j$numcpu NO_WARNINGS=1 TEXTMODE_VAC=1 NO_VISUALS=1
 
 if ! [ -e "bin/libcathook.so" ]; then
 	echo "FATAL: Build failed"
@@ -36,4 +36,4 @@ fi
 
 popd
 
-cp "$cathook/bin/libcathook.so" cathook
+sudo cp "$cathook/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"

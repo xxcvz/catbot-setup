@@ -16,3 +16,4 @@ git fetch
 git pull
 make clean
 make -j$numcpu
+make install
