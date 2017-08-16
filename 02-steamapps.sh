@@ -31,6 +31,9 @@ echo "Is this the correct path?"
 echo "$1"
 read -p "Press enter to continue or Ctrl+C (close) to stop."
 sudo ln -s "$1" "/opt/steamapps"
+
+# fuck permissions!!!
+
 sudo chown -h $USER:catbots "/opt/steamapps"
 sudo chown -R $USER:catbots "/opt/steamapps"
 sudo chmod -R g+rwx "/opt/steamapps"
@@ -38,3 +41,4 @@ sudo chmod +x "/opt"
 sudo chmod +x "/opt/steamapps"
 sudo chmod -R go+X "$1"
 sudo chown -R $USER:catbots "/opt/steamapps/common/Team Fortress 2/cathook"
+cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); chmod +x .; cd ..; done
