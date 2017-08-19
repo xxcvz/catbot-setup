@@ -10,4 +10,4 @@ if [ $EUID == 0 ]; then
 fi
 
 cp cat_autoexec_textmode.cfg "/opt/steamapps/common/Team Fortress 2/tf/cfg"
-cp botspam "/opt/steamapps/common/Team Fortress 2/cathook"
+cp botspam "/opt/cathook/data/"
