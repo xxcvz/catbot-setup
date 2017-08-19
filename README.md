@@ -37,5 +37,16 @@
 ### My bots crashed or are frozen.
 Use `./99-kill-everything.sh` to kill all bots/steam instances, stop IPC server and start over from step 14.
 
-### I get error message libGL error: unable to load driver: radeonsi_dri.so
-Use `./97-fix-radeonsi_dri.sh` to remove libstdc++.so.6 and fix the problem.
+### I get error message libGL error: unable to load driver: radeonsi_dri.so/swrast_dri.so
+Use `sudo ./97-fix-radeonsi_dri.sh` to remove libstdc++.so.6 and fix the problem.
+
+### Some of my Steam processes note high CPU usage, which hinders my bots from fragging effectively!
+In each Steam instance that encounters this problem, go to **Settings** > **Downloads** > **Clear Download Cache**. Restart and relogin, that should fix it.
+
+### Some of my TF2 instances do not start up properly (eg. stuck on ~90 MB of RAM usage).
+Restart Steam on each account that fails to start up the game properly.
+
+### TF2 processes crash upon injecting cathook.
+There are two causes & solutions I have encountered. The more common one involves simply having TF2 processes left running before injecting cathook for too long - simply try again, but inject cathook quicker!
+The much less common one occured to me when I moved my linux installation with catbots already configured to a completely separate machine, causing cathook to spit out SIGILL errors. Recompiling cathook with `./07-build-textmode.sh` fixed the issue.
+If neither of these apply to you, consult your cathook logs.
