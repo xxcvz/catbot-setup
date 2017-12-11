@@ -12,7 +12,7 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-if ! [ -e "$cathook/" ] || ! [ -e "$cathook/.git" ] || ! [ -e "$cathook/source-sdk-2013" ]; then
+if ! [ -e "$cathook/" ] || ! [ -e "$cathook/.git" ] || ! [ -e "$cathook/src/hack.cpp" ]; then
 	echo "Specified path doesn't point to cathook directory"
 	exit
 fi
