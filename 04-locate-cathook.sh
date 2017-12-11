@@ -17,7 +17,7 @@ if [ "$#" -ne 1 ]; then
 	exit
 fi
 
-if ! [ -e "$1/" ] || ! [ -e "$1/.git" ] || ! [ -e "$1/source-sdk-2013" ]; then
+if ! [ -e "$1/" ] || ! [ -e "$1/.git" ] || ! [ -e "$1/src/hack.cpp" ]; then
 	echo "Specified path doesn't point to cathook directory"
 	exit
 fi

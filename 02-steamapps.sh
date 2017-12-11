@@ -41,4 +41,4 @@ sudo chmod +x "/opt"
 sudo chmod +x "/opt/steamapps"
 sudo chmod -R go+X "$1"
 sudo chown -R $USER:catbots "/opt/steamapps/common/Team Fortress 2/cathook"
-cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); chmod +x .; cd ..; done
+cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); sudo chmod +x .; cd ..; done
