@@ -14,7 +14,7 @@ pushd account-generator
 node app >/tmp/cathook-appgen.log &
 popd
 pushd cathook-ipc-web-panel
-./run.sh
+./run.sh &
 popd
 
 sleep 5;
