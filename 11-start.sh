@@ -11,10 +11,10 @@ fi
 
 /opt/cathook/ipc/bin/server -s >/dev/null &
 pushd account-generator
-node app >/dev/null &
+node app >/tmp/cathook-appgen.log &
 popd
 pushd cathook-ipc-web-panel
-sudo node app >/dev/null &
+sudo node app >/tmp/cathook-webpanel.log &
 popd
 
 sleep 5;
