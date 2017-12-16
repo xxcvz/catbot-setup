@@ -16,5 +16,5 @@ xhost + >/dev/null
 for i in $(seq 1 $max)
 do
 	echo "Starting Steam for catbot $i"
-	sudo su - catbot-$i -c 'steam &>/dev/null &'
+	sudo su - catbot-$i -c "steam &>/tmp/steam-catbot-$i.log 2>&1 &"
 done

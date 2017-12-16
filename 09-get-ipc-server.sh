@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-#	This script updates and rebuilds cathook IPC server
+#	This script performs installation of cathook IPC server
 #
 
 if [ $EUID == 0 ]; then
@@ -9,11 +9,16 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
+git clone https://github.com/nullifiedcat/cathook-ipc-server --recursive
+
 numcpu=$(grep -c ^processor /proc/cpuinfo)
 
-cd cathook-ipc-server
+pushd cathook-ipc-server
+
 git fetch
 git pull
 make clean
 make -j$numcpu
-make install
+sudo make install
+
+popd

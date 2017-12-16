@@ -25,4 +25,5 @@ do
 	sudo usermod -g catbots catbot-$i
 	sudo -H -u catbot-$i bash -c "mkdir -p /home/catbot-$i/.local/share/Steam"
 	sudo -H -u catbot-$i bash -c "ln -s \"/opt/steamapps\" \"/home/catbot-$i/.local/share/Steam/steamapps\""
+	sudo -H -u catbot-$i bash -c "cp ~/.steam/steam/steam_install_agreement.txt ~/.steam"
 done
