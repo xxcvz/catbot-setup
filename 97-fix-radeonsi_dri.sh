@@ -16,13 +16,11 @@ do
 	then
 		if [ -e "/home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/" ]
 		then
-			if [ -e "/home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.*" ]
+			if [ -e "/home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6" ]
 			then
 				echo "Fixing $n.."
-				find "/home/$n/.steam/steam/ubuntu12_32" -name "libgcc_s.so*" -delete
-				find "/home/$n/.steam/steam/ubuntu12_32" -name "libgstdc++.so*" -delete
-				#sudo mv /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.* /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.*
-				#sudo mv /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.* /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.*
+				sudo mv /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.* /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.*
+				sudo mv /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.* /home/$n/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.*
 				echo "Fixed."
 			else
 				echo "Skipping $n - already fixed."
