@@ -9,12 +9,16 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
+xhost +
+
 /opt/cathook/ipc/bin/server -s >/dev/null &
 pushd account-generator
-node app >/tmp/cathook-appgen.log &
+node app >/tmp/cathook-accgen.log &
+echo $! >/tmp/cat-appgen-pid
 popd
 pushd cathook-ipc-web-panel
 ./run.sh &
+echo $! >/tmp/cat-webpanel-pid
 popd
 
 sleep 5;

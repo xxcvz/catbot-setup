@@ -20,6 +20,10 @@ read -p "Press ENTER to continue"
 
 for i in $(seq 1 $max)
 do
+	if [ -d "/home/catbot-$i" ]; then
+		echo "catbot-$i already exists"
+		continue
+	fi
 	echo "Creating user catbot-$i"
 	sudo useradd -m catbot-$i
 	sudo usermod -g catbots catbot-$i
