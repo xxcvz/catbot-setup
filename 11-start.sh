@@ -14,7 +14,7 @@ xhost +
 /opt/cathook/ipc/bin/server -s >/dev/null &
 pushd account-generator
 node app >/tmp/cathook-accgen.log &
-echo $! >/tmp/cat-appgen-pid
+echo $! >/tmp/cat-accgen-pid
 popd
 pushd cathook-ipc-web-panel
 ./run.sh &

@@ -18,7 +18,7 @@ fi
 
 read -p "Press ENTER to continue"
 
-STEAM_ROOT=/home/catbot-1/.steam/steam
+STEAM_ROOT=/home/catbot-1/.local/share/Steam
 
 cd $STEAM_ROOT ; while [ $(pwd) != "/" ]; do echo $(pwd); sudo chmod +x .; cd ..; done
 sudo chmod g+rwx -R $STEAM_ROOT
