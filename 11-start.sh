@@ -12,6 +12,7 @@ fi
 xhost +
 
 /opt/cathook/ipc/bin/server -s >/dev/null &
+echo $! >/tmp/cat-server-pid
 pushd account-generator
 node app >/tmp/cathook-accgen.log &
 echo $! >/tmp/cat-accgen-pid
