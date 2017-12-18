@@ -27,6 +27,8 @@ do
 	echo "Creating user catbot-$i"
 	sudo useradd -m catbot-$i
 	sudo usermod -g catbots catbot-$i
+	sudo mkdir -p /home/catbot-$i
+	sudo chown catbot-$i:catbots /home/catbot-$i
 	sudo -H -u catbot-$i bash -c "mkdir -p /home/catbot-$i/.local/share/Steam"
 	sudo -H -u catbot-$i bash -c "ln -s \"/opt/steamapps\" \"/home/catbot-$i/.local/share/Steam/steamapps\""
 	sudo -H -u catbot-$i bash -c "mkdir -p .steam"
