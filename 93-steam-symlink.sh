@@ -30,7 +30,11 @@ do
 		continue;
 	fi
 	echo "Linking for catbot-$i"
-	sudo -H -u catbot-$i bash -c "mkdir -p \"/home/catbot-$i/.local/share/Steam/$s\""	
+	sudo -H -u catbot-$i bash -c "mkdir -p \"/home/catbot-$i/.local/share/Steam\""	
+	if ! [ -e "/home/catbot-$i/.steam/steam" ]; then
+		sudo -H -u catbot-$i bash -c "mkdir -p \"/home/catbot-$i/.steam\""
+		sudo -H -u catbot-$i bash -c "ln -s \"/home/catbot-$i/.local/share/Steam\" \"/home/catbot-$i/.steam/steam\""
+	fi
 	cd /home/catbot-$i/.local/share/Steam
 	for s in package graphics ubuntu12_32 resource tenfoot bin friends servers bootstrap.tar.xz; do
 		sudo rm -rf "/home/catbot-$i/.steam/steam/$s"
