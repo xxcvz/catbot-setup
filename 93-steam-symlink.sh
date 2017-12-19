@@ -36,8 +36,8 @@ do
 		sudo -H -u catbot-$i bash -c "ln -s \"/home/catbot-$i/.local/share/Steam\" \"/home/catbot-$i/.steam/steam\""
 	fi
 	cd /home/catbot-$i/.local/share/Steam
-	for s in package graphics ubuntu12_32 resource tenfoot bin friends servers bootstrap.tar.xz; do
-		sudo rm -rf "/home/catbot-$i/.steam/steam/$s"
+	for s in controller_base linux32 linux64 public package graphics ubuntu12_32 ubuntu12_64 resource tenfoot bin friends servers bootstrap.tar.xz; do
+		sudo rm -rf "/home/catbot-$i/.local/share/Steam/$s"
 		sudo -H -u catbot-$i bash -c "ln -s \"$STEAM_ROOT/$s\" \"/home/catbot-$i/.local/share/Steam/$s\""	
 	done
 done
