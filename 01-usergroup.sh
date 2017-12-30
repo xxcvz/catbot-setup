@@ -9,5 +9,5 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-sudo groupadd catbots
-sudo usermod -a -G catbots $USER
+sudo groupadd `cat kisak`s
+sudo usermod -a -G `cat kisak`s $USER

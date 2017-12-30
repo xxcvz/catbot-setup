@@ -19,6 +19,6 @@ xhost + >/dev/null
 
 for i in $(seq $min $max)
 do
-	echo "Starting Steam for catbot $i"
-	sudo su - catbot-$i -c "steam &>/tmp/steam-catbot-$i.log 2>&1 &"
+	echo "Starting Steam for `cat kisak` $i"
+	sudo su - `cat kisak`-$i -c "steam &>/tmp/steam-`cat kisak`-$i.log 2>&1 &"
 done
