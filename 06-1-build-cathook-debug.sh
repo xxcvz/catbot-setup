@@ -27,7 +27,7 @@ sudo rm "/opt/cathook/bin/libcathook-textmode.so"
 pushd "$cathook"
 
 make clean
-make -j$numcpu NO_WARNINGS=1 NO_VISUALS=1 BUILD_DEBUG=1
+make -j$numcpu NO_WARNINGS=1 NO_VISUALS=1 BUILD_DEBUG=1 TEXTMODE_VAC=1
 
 if ! [ -e "bin/libcathook.so" ]; then
 	echo "FATAL: Build failed"
