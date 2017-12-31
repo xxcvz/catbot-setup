@@ -19,3 +19,7 @@ popd
 pushd cathook-ipc-web-panel
 ./update.sh
 popd
+
+pushd cathook-ipc-server
+./update.sh
+popd
