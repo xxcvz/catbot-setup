@@ -6,9 +6,15 @@
 
 read -p "Press ENTER to continue"
 
-for i in {1..12}
+kisak=`cat kisak`
+
+for i in {2..32}
 do
-	echo "Deleting user catbot-$i"
-	sudo userdel -r catbot-$i
-	sudo groupdel catbot-$i
+	if ! [ -d "/home/$kisak-$i" ]; then
+		echo "No $kisak $i";
+		continue;
+	fi
+	echo "Deleting user $kisak-$i"
+	sudo groupdel $kisak-$i
+	sudo userdel -r $kisak-$i
 done

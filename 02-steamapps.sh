@@ -9,7 +9,7 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-if ! [ $(getent group catbots) ]; then
+if ! [ $(getent group `cat kisak`s) ]; then
 	echo "Please, run scripts in the right order."
 	exit
 fi
@@ -34,11 +34,11 @@ sudo ln -s "$1" "/opt/steamapps"
 
 # fuck permissions!!!
 
-sudo chown -h $USER:catbots "/opt/steamapps"
-sudo chown -R $USER:catbots "/opt/steamapps"
+sudo chown -h $USER:`cat kisak`s "/opt/steamapps"
+sudo chown -R $USER:`cat kisak`s "/opt/steamapps"
 sudo chmod -R g+rwx "/opt/steamapps"
 sudo chmod +x "/opt"
 sudo chmod +x "/opt/steamapps"
 sudo chmod -R go+X "$1"
-sudo chown -R $USER:catbots "/opt/steamapps/common/Team Fortress 2/cathook"
+sudo chown -R $USER:`cat kisak`s "/opt/steamapps/common/Team Fortress 2/cathook"
 cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); sudo chmod +x .; cd ..; done

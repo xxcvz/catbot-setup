@@ -20,9 +20,17 @@ read -p "Press ENTER to continue"
 
 for i in $(seq 1 $max)
 do
-	echo "Creating user catbot-$i"
-	sudo useradd -m catbot-$i
-	sudo usermod -g catbots catbot-$i
-	sudo -H -u catbot-$i bash -c "mkdir -p /home/catbot-$i/.local/share/Steam"
-	sudo -H -u catbot-$i bash -c "ln -s \"/opt/steamapps\" \"/home/catbot-$i/.local/share/Steam/steamapps\""
+	if [ -d "/home/`cat kisak`-$i" ]; then
+		echo "`cat kisak`-$i already exists"
+		continue
+	fi
+	echo "Creating user `cat kisak`-$i"
+	sudo useradd -m `cat kisak`-$i
+	sudo usermod -g `cat kisak`s `cat kisak`-$i
+	sudo mkdir -p /home/`cat kisak`-$i
+	sudo chown `cat kisak`-$i:`cat kisak`s /home/`cat kisak`-$i
+	sudo -H -u `cat kisak`-$i bash -c "mkdir -p /home/`cat kisak`-$i/.local/share/Steam"
+	sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steamapps\" \"/home/`cat kisak`-$i/.local/share/Steam/steamapps\""
+	sudo -H -u `cat kisak`-$i bash -c "mkdir -p ~/.steam"
+	sudo -H -u `cat kisak`-$i bash -c "touch ~/.steam/steam_install_agreement.txt"
 done

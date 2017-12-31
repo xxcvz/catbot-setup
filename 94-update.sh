@@ -12,5 +12,10 @@ fi
 git fetch
 git pull
 
-bash ./06-rebuild-ipc-server.sh
-bash ./07-build-textmode.sh
+pushd account-generator
+./update.sh
+popd
+
+pushd cathook-ipc-web-panel
+./update.sh
+popd
