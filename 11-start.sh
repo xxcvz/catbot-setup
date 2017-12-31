@@ -12,14 +12,12 @@ fi
 xhost +
 
 /opt/cathook/ipc/bin/server -s >/dev/null &
-echo $! >/tmp/cat-server-pid
+echo $! >/tmp/cat-ipc-server.pid
 pushd account-generator
 node app >/tmp/cathook-accgen.log &
-echo $! >/tmp/cat-accgen-pid
 popd
 pushd cathook-ipc-web-panel
-./run.sh &
-echo $! >/tmp/cat-webpanel-pid
+sudo bash ./run.sh &
 popd
 
 sleep 5;
