@@ -14,11 +14,5 @@ git clone https://github.com/nullifiedcat/cathook-ipc-server --recursive
 numcpu=$(grep -c ^processor /proc/cpuinfo)
 
 pushd cathook-ipc-server
-
-git fetch
-git pull
-make clean
-make -j$numcpu
-sudo make install
-
+./install.sh
 popd
