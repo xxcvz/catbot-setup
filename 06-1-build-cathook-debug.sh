@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-#	This script builds textmode build of cathook (in user's cathook folder)
+#	This script builds textmode build of cathook
 #
 
 numcpu=$(grep -c ^processor /proc/cpuinfo)
@@ -17,17 +17,14 @@ if ! [ -e "$cathook/" ] || ! [ -e "$cathook/.git" ] || ! [ -e "$cathook/src/hack
 	exit
 fi
 
-echo "WARNING: Your current build of cathook will be deleted"
-echo "You will have to re-compile cathook after this"
-read -p "Press enter to continue or Ctrl+C (close) to stop."
-
 sudo mkdir -p "/opt/cathook/bin"
 sudo rm "/opt/cathook/bin/libcathook-textmode.so"
 
-pushd "$cathook"
+mkdir -p build-debug
+pushd build-debug
 
-make clean
-make -j$numcpu NO_WARNINGS=1 NO_VISUALS=1 BUILD_DEBUG=1 TEXTMODE_VAC=1
+cmake -DCMAKE_BUILD_TYPE=Debug -DEnableVisuals=0 -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 "$cathook"
+make -j$numcpu
 
 if ! [ -e "bin/libcathook.so" ]; then
 	echo "FATAL: Build failed"
@@ -36,4 +33,4 @@ fi
 
 popd
 
-sudo cp "$cathook/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
+sudo cp "build-debug/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
