@@ -24,15 +24,15 @@
 (Alternatively run ./95 to just set it up for harvest incl. map selection)
 19. open `localhost:8081` and `localhost:8080` in your browser
 20. Enter the passwords given in step 15 into the respective windows (8080 is the account generator, 8081 the webpanel), then refresh
-21. If you supplied a Account generator databse, you should see a number of avaiable accounts in the account generator. (if you didn't you need to manually adjust the web panel and manually enter accounts using ./04 since Account generation is patched as of now), it will automatically get used by the Web panel
-22. Enter a bot quota (not higher than the number you created) ad apply it
+21. If you supplied an Account generator databse, you should see a number of avaiable accounts in the account generator. (if you didn't you need to manually adjust the web panel and manually enter accounts using ./04 since Account generation is patched as of now), it will automatically get used by the Web panel
+22. Enter a bot quota (not higher than the number you created) and apply it
 23. Restart all bots using their restart button
 24. The bots should now be running, check cathook-ipc-web-panel/\*.log for details on crashes.
 25. When an update is released, run `./13-update.sh`
 
 # TIPS
 
-1. You can run console commands on bots' games. If you are in the web panel, then you can use either `exec <bot ID> <command>` or `exec_all <command>` (will run a command on one bot or all bots, for example `exec_all say hello` or `exec 1 kill`
+1. You can run console commands on bots' games. If you are in the web panel, then you can use either `exec ` or `exec_all ` (will run a command on one bot or all bots, for example `exec_all say hello` or `exec 1 kill`
 
 # FAQ
 
