@@ -32,7 +32,9 @@
 
 # TIPS
 
-1. You can run console commands on bots' games. If you are in the web panel, then you can use either `exec ` or `exec_all ` (will run a command on one bot or all bots, for example `exec_all say hello` or `exec 1 kill`
+1. You can run console commands on bots' games. If you are in the web panel, then you can use either `exec <bot ID> <command>` or `exec_all <command>` (will run a command on one bot or all bots, for example `exec_all say hello` or `exec 1 kill`
+
+2. You can increase the amount of catbots you can host by installing a custom UKSM (Ultra Kernel Samepage Merging) kernel. For further details, look up how to install kernel patches and properly install a kernel. https://github.com/dolohow/uksm 
 
 # FAQ
 
