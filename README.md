@@ -12,26 +12,29 @@
 8. You have to log out (or restart the PC)
 9. `./02-steamapps.sh "/path/to/steamapps"` (you got path in step 2)
 10. `./03-create-users.sh 4` (replace `4` with amount of accounts you want to create, 12 by default)
-11. `./04-locate-cathook.sh "/path/to/cathook"` (step 3)
-12. Run scripts `./05-get-ipc-server.sh`, `./06-rebuild-ipc-server.sh`, `./07-build-textmode.sh`
-13. Choose the amount of bots you will run, it's better to start with something like 1 (to test) or 3. My i5 3570k @ 3.8GHz and 16GB RAM could run 9 cat-bots.
-14. `./08-recommended-settings.sh` - this script will copy chatspam (`botspam` file) and recommended config to your Team Fortress 2 installation
-15. `./09-start-ipc-server.sh`
-16. You have to open new terminal window. Do not close the IPC server, you need it to see bots' status
-17. `./10-start-steams.sh 4` (replace `4` with amount of bots you want to start, 6 by default)
-18. You have to accept Steam's license terms, wait for it to install, etc.
-19. Create Steam accounts (or log in) in these Steam windows
-20. You have to launch Team Fortress 2, open Casual matchmaking menu and **select only those maps for which you have walkbot paths installed (these path files must be named `default`). Bot abandons the game if there is no default path for map.**
-21. Click "Save" button above map selection menu. You can close TF2 now.
-22. `./11-start-games.sh 4` (replace `4` with how many intances of TF2 you want to run, 6 by default)
-23. Wait at least 30 seconds (or a minute)
-24. `./12-inject-cathook.sh`
-25. Bots should work now, check IPC server console to see their status.
-26. When an update is released, run `./13-update.sh`
+11. `./04-init-steams.sh 4` (replace `4` with the amount of accounts you want to init steam on, uset he same as above for this.)
+12. `./05-locate-cathook.sh "/path/to/cathook"` (step 3)
+13. Run scripts `./06-build-cathook.sh`, `./07-install-config.sh`, `./08-get-account-generator.sh`, `./09-get-ipc-server.sh` and `./10-get-webpanel.sh`
+14. Choose the amount of bots you will run, it's better to start with something like 1 (to test) or 3. My i5 3570k @ 3.8GHz and 16GB RAM could run 9 cat-bots.
+14. `sudo mkdir cathook-ipc-web-panel/logs;sudo touchfile cathook-ipc-web-panel/logs/main.log;chmod 777 -R cathook-ipc-web-panel/logs`
+15. Incase you have a account database file, copy it into `account-generator` now.
+16. `./11-start.sh`
+17. You have to launch Team Fortress 2, open Casual matchmaking menu and **select only those maps for which you have walkbot paths installed (these path files must be named `default`). Bot abandons the game if there is no default path for map.**
+18. Click "Save" button above map selection menu. You can close TF2 now.
+(Alternatively run ./95 to just set it up for harvest incl. map selection)
+19. open `localhost:8081` and `localhost:8080` in your browser
+20. Enter the passwords given in step 15 into the respective windows (8080 is the account generator, 8081 the webpanel), then refresh
+21. If you supplied an Account generator databse, you should see a number of avaiable accounts in the account generator. (if you didn't you need to manually adjust the web panel and manually enter accounts using ./04 since Account generation is patched as of now), it will automatically get used by the Web panel
+22. Enter a bot quota (not higher than the number you created) and apply it
+23. Restart all bots using their restart button
+24. The bots should now be running, check cathook-ipc-web-panel/\*.log for details on crashes.
+25. When an update is released, run `./13-update.sh`
 
 # TIPS
 
-1. You can run console commands on bots' games. If you are in catbot-setup folder, type `cd cathook-ipc-server/bin`, then you can use either `./exec <bot ID> <command>` or `./exec_all <command>` (will run a command on one bot or all bots, for example `./exec_all say hello` or `./exec 1 kill`
+1. You can run console commands on bots' games. If you are in the web panel, then you can use either `exec <bot ID> <command>` or `exec_all <command>` (will run a command on one bot or all bots, for example `exec_all say hello` or `exec 1 kill`
+
+2. You can increase the amount of catbots you can host by installing a custom UKSM (Ultra Kernel Samepage Merging) kernel. For further details, look up how to install kernel patches and properly install a kernel. https://github.com/dolohow/uksm 
 
 # FAQ
 
