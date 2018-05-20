@@ -9,7 +9,7 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-git clone https://github.com/nullifiedcat/cathook-ipc-web-panel --recursive
+git clone https://github.com/nullworks/cathook-ipc-web-panel --recursive
 
 pushd cathook-ipc-web-panel
 ./install.sh

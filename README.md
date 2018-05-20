@@ -6,7 +6,7 @@
 2. Locate your steamapps folder (usually in `/home/yourname/.local/share/Steam/steamapps`, to see hidden folders/files press Ctrl+H) and copy this path somewhere
 3. Locate your cathook folder (probably in `/home/yourname/cathook`), this is the folder with injection scripts, etc. Save the path
 4. Open terminal (Ctrl+Alt+T)
-5. Run this command: `git clone https://github.com/nullifiedcat/catbot-setup && cd catbot-setup` (next commands will just be in `monospace blocks`, you have to run them). **Remember that you can auto-complete the command in bash by pressing** `Tab`
+5. Run this command: `git clone https://github.com/nullworks/catbot-setup && cd catbot-setup` (next commands will just be in `monospace blocks`, you have to run them). **Remember that you can auto-complete the command in bash by pressing** `Tab`
 6. `./00-generate-random-username.sh`
 7. `./01-usergroup.sh`
 8. You have to log out (or restart the PC)

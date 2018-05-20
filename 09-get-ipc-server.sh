@@ -9,7 +9,7 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-git clone https://github.com/nullifiedcat/cathook-ipc-server --recursive
+git clone https://github.com/nullworks/cathook-ipc-server --recursive
 
 numcpu=$(grep -c ^processor /proc/cpuinfo)
 

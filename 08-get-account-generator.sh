@@ -9,7 +9,7 @@ if [ $EUID == 0 ]; then
 	exit
 fi
 
-git clone https://github.com/nullifiedcat/account-generator --recursive
+git clone https://github.com/nullworks/account-generator --recursive
 
 pushd account-generator
 ./install.sh
