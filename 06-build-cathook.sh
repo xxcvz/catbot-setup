@@ -23,7 +23,7 @@ sudo rm "/opt/cathook/bin/libcathook-textmode.so"
 mkdir -p build
 pushd build
 
-cmake -DCMAKE_BUILD_TYPE=Release -DEnableVisuals=0 -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 "$cathook"
+cmake -DCMAKE_BUILD_TYPE=Release -DEnableVisuals=0 -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 "$cathook"
 make -j$numcpu
 
 if ! [ -e "bin/libcathook.so" ]; then
