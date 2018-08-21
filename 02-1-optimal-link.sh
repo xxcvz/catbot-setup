@@ -49,10 +49,10 @@ cd $(realpath /opt/steam/package) ; while [ $(pwd) != "/" ]; do echo $(pwd); sud
 cd $workdir
 for i in $(seq 1 $max)
 do
-    sudo -H -u `cat kisak`-$i bash -c "rm -rf \"/home/`cat kisak`-$i/.local/share/Steam/steam/ubuntu12_32\""
-    sudo -H -u `cat kisak`-$i bash -c "rm -rf \"/home/`cat kisak`-$i/.local/share/Steam/steam/ubuntu12_64\""
-    sudo -H -u `cat kisak`-$i bash -c "rm -rf \"/home/`cat kisak`-$i/.local/share/Steam/steam/package\""
-    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/ubuntu12_32\" \"/home/`cat kisak`-$i/.local/share/Steam/steam\""
-    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/ubuntu12_64\" \"/home/`cat kisak`-$i/.local/share/Steam/steam\""
-    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/package\" \"/home/`cat kisak`-$i/.local/share/Steam/steam\""
+    sudo rm -r "/home/`cat kisak`-$i/.steam/ubuntu12_32"
+    sudo rm -r "/home/`cat kisak`-$i/.steam/ubuntu12_64"
+    sudo rm -r "/home/`cat kisak`-$i/.steam/package"
+    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/ubuntu12_32\" \"/home/`cat kisak`-$i/.steam\""
+    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/ubuntu12_64\" \"/home/`cat kisak`-$i/.steam\""
+    sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steam/package\" \"/home/`cat kisak`-$i/.steam\""
 done
