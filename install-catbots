@@ -90,8 +90,8 @@ if [ -f ./users ] && [ ! -f ./steams ]; then
         echo "Starting Steam for `cat kisak` $i"
         sudo su - `cat kisak`-$i -c "DISPLAY=:0 steam &>/tmp/steam-`cat kisak`-$i.log 2>&1 &"
     done
-    touch ./steams
     read -p "Press enter if all steams have reached the login screen. (This will kill ALL steams) "
+    touch ./steams
     sudo killall steam
 fi
 
