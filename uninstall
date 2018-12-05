@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+read -p "Press ENTER to continue"
+
+kisak=`cat kisak`
+
+for i in $(seq 1 $(cat ./users))
+do
+	if ! [ -d "/home/$kisak-$i" ]; then
+		echo "No $kisak $i";
+		continue;
+	fi
+	echo "Deleting user $kisak-$i"
+	sudo groupdel $kisak-$i
+	sudo userdel -r $kisak-$i
+done
+sudo groupdel "$(cat kisak)s"
+rm -rf ./account-generator
+rm -rf ./build
+rm -rf ./cathook
+rm -rf ./cathook-ipc-server
+rm -rf ./cathook-ipc-web-panel
+rm steams
+rm users
+rm kisak
