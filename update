@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+git pull
+pushd cathook
+git pull
+popd
+mkdir -p build
+pushd build
+cmake -DCMAKE_BUILD_TYPE=Release -DEnableVisuals=0 -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 ../cathook/
+numcpu=$(grep -c ^processor /proc/cpuinfo)
+make -j$numcpu
+if ! [ -e "bin/libcathook.so" ]; then
+    echo "FATAL: Build failed"
+    exit
+fi
+popd
+sudo mkdir -p "/opt/cathook/bin/"
+sudo cp "build/bin/libcathook.so" "/opt/cathook/bin/libcathook-textmode.so"
