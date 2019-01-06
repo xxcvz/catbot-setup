@@ -2,6 +2,7 @@
 git pull
 pushd cathook
 git pull
+git submodule update --init --recursive
 popd
 mkdir -p build
 pushd build
