@@ -2,6 +2,7 @@
 // it's recommended to use accounts without steamguard
 // email probably doesn't match, to manually add your email (username:pass:email) you can simply
 // access i.split(":")[2] and set the email field to it.
+// NOTE: this needs node.js, use npm install to install dependencies needed before running it.
 var fs = require('fs');
 
 // Load accounts
