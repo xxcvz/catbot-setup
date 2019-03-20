@@ -56,7 +56,7 @@ if [ ! -f ./users ]; then
         re='^[0-9]+$'
         read -p "How many bots would you like to host? " yournumber
         if [[ $yournumber =~ $re ]] ; then
-            echo $yournumber > 'users'
+            echo $yournumber > ./users
             for i in $(seq 1 $yournumber)
             do
                 if [ -d "/home/`cat kisak`-$i" ]; then
