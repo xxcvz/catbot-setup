@@ -1,24 +1,35 @@
 #!/bin/bash
 
 #
-#	This script starts IPC server, account generator, etc..
+#       This script starts IPC server, account generator, etc..
 #
 
 if [ $EUID == 0 ]; then
-	echo "This script must not be run as root"
-	exit
+    echo "This script must not be run as root"
+    exit
 fi
 
 xhost +
 
-/opt/cathook/ipc/bin/server -s >/dev/null &
-echo $! >/tmp/cat-ipc-server.pid
-pushd account-generator
-node app >/tmp/cathook-accgen.log &
-popd
-pushd cathook-ipc-web-panel
-sudo bash ./run.sh &
-popd
+ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
+[ -z "$ipcserver" ] && /opt/cathook/ipc/bin/server -s >/dev/null &
+[ -z "$ipcserver" ] && echo $! >/tmp/cat-ipc-server.pid
+
+if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webpanel.pid"` >/dev/null; then
+    echo Account generator already running.
+else
+    pushd cathook-ipc-web-panel
+    sudo bash ./run.sh &
+    popd
+fi
+
+if [ -e "/tmp/ncat-account-generator.pid" ] && ps -p `cat "/tmp/ncat-account-generator.pid"` >/dev/null; then
+    echo Account generator already running.
+else
+    pushd account-generator
+    node app >/tmp/cathook-accgen.log &
+    popd
+fi
 
 sleep 5;
 
