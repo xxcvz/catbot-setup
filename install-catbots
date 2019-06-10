@@ -99,7 +99,7 @@ if [ ! -f /opt/cathook/bin/libcathook-textmode.so ]; then
     numcpu=$(grep -c ^processor /proc/cpuinfo)
     mkdir -p build
     pushd build
-    cmake -DCMAKE_BUILD_TYPE=Release -DEnableVisuals=0 -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 ../cathook/
+    cmake -DCMAKE_BUILD_TYPE=Release -DDrawType:STRING="No Visuals" -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 ../cathook/
     make -j$numcpu
     if ! [ -e "bin/libcathook.so" ]; then
         echo "FATAL: Build failed"
