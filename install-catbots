@@ -147,5 +147,8 @@ fi
 
 echo "Installation finished. Please ensure that all navmashes are inside your map folder (https://github.com/nullworks/catbot-database)."
 
-echo "You also have to provide either an API Key inside of the cathook-ipc-web-panel folder named 'apikey' (More information in README) or provide an account database in the account-generator folder."
 echo "The web-panel and account storage can be started with ./start"
+
+echo "Accgen is broken due to recent recaptcha updates, as well as us running out of accounts to provide. You must create your own list of accounts to use for catbots."
+echo "Create a list of steam accounts, and save them to catbot-setup/accounts.txt in username:password format."
+echo "Then use /"node convert.js/" to to format it. Rename the resulting file to accounts.cg.json, and copy it to the account-generator folder."
