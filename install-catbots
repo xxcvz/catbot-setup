@@ -12,6 +12,11 @@ if ! [ -e "/opt/cathook/" ]; then
 	exit
 fi
 
+if ! [ -d "./account-generator" ]; then
+	echo "You need to install catbot first, idiot."
+	exit
+fi
+
 if [ ! -x "$(command -v touch)" ]; then
     echo "Touch doesn't exist. Please install it."
     exit
