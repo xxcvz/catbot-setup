@@ -13,7 +13,7 @@ var accounts = JSON.parse("{ \"array\": [], \"used\": 0 }");
 var accountsStr = [];
 
 // Remove \n\n by replacing it with \n
-var array = fs.readFileSync("accounts.txt").toString().replace(/\n\n/g, '\n').split("\n");
+var array = fs.readFileSync("accounts.txt").toString().replace(/\n\n/g, "\n").split("\n");
 array.pop();
 for (i in array) {
     accountsStr.push(array[i]);
