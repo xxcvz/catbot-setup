@@ -22,18 +22,6 @@ if [ ! -x "$(command -v npm)" ]; then
 	exit
 fi
 
-if [ -x "$(command -v dpkg)" ]; then
-	if ! dpkg -s libsdl2:i386 &> /dev/null 2>&1; then
-		echo "libsdl2:i386 doesn't exist. Please install it."
-		exit
-	fi
-else
-        if ! pacman -Qi lib32-sdl &> /dev/null 2>&1; then
-                echo "lib32-sdl doesn't exist. Please install it."
-                exit
-        fi
-fi
-
 if [ ! -d "./cathook" ]; then
     git clone --recursive https://github.com/nullworks/cathook
 fi
