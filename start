@@ -9,6 +9,11 @@ if [ $EUID == 0 ]; then
     exit
 fi
 
+if ! [ -d "./account-generator" ]; then
+	echo "You need to install catbot first, idiot."
+	exit
+fi
+
 xhost +
 
 ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
