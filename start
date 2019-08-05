@@ -40,3 +40,8 @@ sleep 5;
 
 echo "Account generator password: `cat /tmp/cat-accgen2-password`"
 echo "IPC Web Panel password: `cat /tmp/cat-webpanel-password`"
+
+echo "Fixing NVIDIA crash"
+sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
+echo "Fixed NVIDIA crash"
+
