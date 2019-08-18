@@ -21,6 +21,9 @@ rm -rf ./build
 rm -rf ./cathook
 rm -rf ./cathook-ipc-server
 rm -rf ./cathook-ipc-web-panel
+rm -rf ./just-disable-vac
+sudo rm -rf /opt/cathook/ipc
+sudo rm /opt/cathook/bin/libcathook-textmode.so
 rm steams
 rm users
 rm kisak

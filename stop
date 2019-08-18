@@ -14,6 +14,8 @@ xhost -
 
 ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
 [ ! -z "$ipcserver" ] && sudo kill ${ipcserver};
+ipcconsole=$( ps faux | grep '/opt/cathook/ipc/bin/console' | grep -vw grep | awk '{ print $2 }' );
+[ ! -z "$ipcconsole" ] && sudo kill ${ipcconsole};
 
 count=$(cat ./users);
 kisak=$(cat ./kisak);
