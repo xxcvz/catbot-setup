@@ -32,7 +32,7 @@ else
             echo "Killing tf2 for ${kisak}-${i}"
             tf2=$(pgrep -u "${kisak}-${i}" hl2_linux);
             steam=$(pgrep -u "${kisak}-${i}" steam);
-            ([ ! -z "$tf2" ] || [ ! -z "$steam" ]) && sudo kill -9 "$tf2" "$steam"
+            ([ ! -z "$tf2" ] || [ ! -z "$steam" ]) && sudo kill -9 $tf2 $steam
         done
     fi
 fi
