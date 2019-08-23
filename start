@@ -29,7 +29,7 @@ if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webp
     echo Account generator already running.
 else
     pushd cathook-ipc-web-panel
-    sudo STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0:/opt/steamapps/common/Team Fortress 2/bin/shaderapiempty.so" bash ./run.sh &
+    sudo STEAM_LD_LIBRARY_PATH="/opt/steamapps/common/Team\ Fortress\ 2/bin/" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0:shaderapiempty.so" bash ./run.sh &
     popd
 fi
 
