@@ -14,7 +14,7 @@ if ! [ -d "./account-generator" ]; then
 	exit
 fi
 
-if [ ! -d "./just-disable-vac" ]; then
+if [ ! -f "/opt/cathook/steam.profile" ]; then
 	echo "You need to run install-catbots again."
 	exit
 fi
@@ -29,7 +29,7 @@ if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webp
     echo Account generator already running.
 else
     pushd cathook-ipc-web-panel
-    sudo STEAM_LD_LIBRARY_PATH="/opt/steamapps/common/Team\ Fortress\ 2/bin/" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0:shaderapiempty.so" bash ./run.sh &
+    sudo STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
     popd
 fi
 
@@ -50,3 +50,6 @@ echo "Fixing NVIDIA crash"
 sudo chmod 700 /opt/steamapps/common/Team\ Fortress\ 2/tf/glshaders.cfg
 echo "Fixed NVIDIA crash"
 
+echo "Creating namespaces"
+sudo ./scripts/ns-create $(cat ./users);
+echo "Done!"

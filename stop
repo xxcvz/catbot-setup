@@ -35,4 +35,5 @@ else
             ([ ! -z "$tf2" ] || [ ! -z "$steam" ]) && sudo kill -9 $tf2 $steam
         done
     fi
+    sudo ./scripts/ns-delete $count
 fi

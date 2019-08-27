@@ -22,6 +22,16 @@ if [ ! -x "$(command -v npm)" ]; then
 	exit
 fi
 
+if [ ! -x "$(command -v npm)" ]; then
+	echo "Firejail doesn't exist. Please install it."
+	exit
+fi
+
+if [ ! -x "$(command -v route)" ]; then
+	echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
+	exit
+fi
+
 if [ ! -d "./cathook" ]; then
     git clone --recursive https://github.com/nullworks/cathook
 fi
@@ -154,6 +164,10 @@ fi
 if [ ! -d "./cathook-ipc-web-panel/logs" ]; then
     mkdir -p ./cathook-ipc-web-panel/logs
     touch ./cathook-ipc-web-panel/logs/main.log
+fi
+
+if [ ! -f /opt/cathook/steam.profile ]; then
+    sudo cp ./steam.profile /opt/cathook/steam.profile
 fi
 
 echo "Installation finished. Please ensure that all navmashes are inside your map folder (https://github.com/nullworks/catbot-database)."
