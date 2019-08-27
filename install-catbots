@@ -22,7 +22,7 @@ if [ ! -x "$(command -v npm)" ]; then
 	exit
 fi
 
-if [ ! -x "$(command -v npm)" ]; then
+if [ ! -x "$(command -v firejail)" ]; then
 	echo "Firejail doesn't exist. Please install it."
 	exit
 fi
