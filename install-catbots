@@ -27,10 +27,12 @@ if [ ! -x "$(command -v firejail)" ]; then
     exit
 fi
 
-if [ ! -x "$(command -v route)" ]; then
-    echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
-    exit
-fi
+sudo su - root <<'RUNASROOT'
+    if [ ! -x "$(command -v route)" ]; then
+        echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
+        exit
+    fi
+RUNASROOT
 
 if [ ! -x "$(command -v pgrep)" ]; then
     echo "Pgrep doesn't exist. Please install it."
