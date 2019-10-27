@@ -27,12 +27,10 @@ if [ ! -x "$(command -v firejail)" ]; then
     exit
 fi
 
-sudo su - root <<'RUNASROOT'
-    if [ ! -x "$(command -v route)" ]; then
-        echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
-        exit
-    fi
-RUNASROOT
+if [ ! -x "$(command -v route)" ]; then
+    echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
+    exit
+fi
 
 if [ ! -x "$(command -v pgrep)" ]; then
     echo "Pgrep doesn't exist. Please install it."
@@ -62,7 +60,7 @@ basename="$(cat kisak)"
 [ -z "$basename" ] && echo "Username file empty!" && exit 1
 
 if ! [ -e "/opt/steamapps" ]; then
-    steamapps="/home/$USER/.steam/steam/steamapps/"
+    steamapps="/home/$USER/.local/share/Steam/steamapps/"
 
     while true; do
         read -p "Is $steamapps your steamapps directory? y/n " yn
@@ -73,7 +71,6 @@ if ! [ -e "/opt/steamapps" ]; then
         esac
     done
     
-    touch link
     sudo ln -s "$steamapps" "/opt/steamapps"
 
     # fuck permissions!!!
@@ -84,7 +81,6 @@ if ! [ -e "/opt/steamapps" ]; then
     sudo chmod +x "/opt"
     sudo chmod +x "/opt/steamapps"
     sudo chmod -R go+X "$steamapps"
-    cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); sudo chmod +x .; cd ..; done
 fi
 
 if [ ! -f ./users ]; then
