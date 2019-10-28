@@ -7,9 +7,9 @@ if [ $EUID == 0 ]; then
 fi
 
 if ! [ -e "/opt/cathook/" ]; then
-	echo "Please install Cathook on your main TF2, first."
-	echo "https://github.com/nullworks/cathook"
-	exit
+    echo "Please install Cathook on your main TF2, first."
+    echo "https://github.com/nullworks/cathook"
+    exit
 fi
 
 if [ ! -x "$(command -v touch)" ]; then
@@ -18,8 +18,28 @@ if [ ! -x "$(command -v touch)" ]; then
 fi
 
 if [ ! -x "$(command -v npm)" ]; then
-	echo "NPM doesn't exist. Please install it."
-	exit
+    echo "NPM doesn't exist. Please install it."
+    exit
+fi
+
+if [ ! -x "$(command -v firejail)" ]; then
+    echo "Firejail doesn't exist. Please install it."
+    exit
+fi
+
+if [ ! -x "$(command -v route)" ] && [ ! -x /sbin/route ]; then
+    echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
+    exit
+fi
+
+if [ ! -x "$(command -v pgrep)" ]; then
+    echo "Pgrep doesn't exist. Please install it."
+    exit
+fi
+
+if [ ! -x "$(command -v xhost)" ]; then
+    echo "XHost doesn't exist. Please install it."
+    exit
 fi
 
 if [ ! -d "./cathook" ]; then
@@ -36,8 +56,11 @@ if [ ! -f ./kisak ]; then
     sudo usermod -a -G `cat kisak`s $USER
 fi
 
+basename="$(cat kisak)"
+[ -z "$basename" ] && echo "Username file empty!" && exit 1
+
 if ! [ -e "/opt/steamapps" ]; then
-    steamapps="/home/$USER/.steam/steam/steamapps/"
+    steamapps="/home/$USER/.local/share/Steam/steamapps/"
 
     while true; do
         read -p "Is $steamapps your steamapps directory? y/n " yn
@@ -48,7 +71,6 @@ if ! [ -e "/opt/steamapps" ]; then
         esac
     done
     
-    touch link
     sudo ln -s "$steamapps" "/opt/steamapps"
 
     # fuck permissions!!!
@@ -59,7 +81,6 @@ if ! [ -e "/opt/steamapps" ]; then
     sudo chmod +x "/opt"
     sudo chmod +x "/opt/steamapps"
     sudo chmod -R go+X "$steamapps"
-    cd $(realpath /opt/steamapps) ; while [ $(pwd) != "/" ]; do echo $(pwd); sudo chmod +x .; cd ..; done
 fi
 
 if [ ! -f ./users ]; then
@@ -91,26 +112,29 @@ if [ ! -f ./users ]; then
 fi
 
 if [ -f ./users ] && [ ! -f ./steams ]; then
-    if [ ! -x "$(command -v xhost)" ]; then
-        echo "XHost doesn't exist. Please install it."
-        exit
-    fi
     xhost + >/dev/null
-    for i in $(seq 1 $(cat ./users))
-    do
-        echo "Starting Steam for `cat kisak` $i"
-        sudo su - `cat kisak`-$i -c "DISPLAY=:0 steam &>/tmp/steam-`cat kisak`-$i.log 2>&1 &"
-    done
-    read -p "Press enter if all steams have reached the login screen. (This will kill ALL steams) "
+    echo "Starting Steam for $basename-1"
+    sudo su - $basename-1 -c "DISPLAY=:0 steam &>/tmp/steam-$basename-1.log 2>&1 &"
+    read -p "Press enter if steam has reached the login screen. "
+    sudo kill -9 $(pgrep -u $basename-1 steam)
+
+    usercount=$(cat ./users)
+    if [ "$usercount" -ge "2" ]; then
+        for i in $(seq 2 $usercount)
+        do
+            echo "Copying Steam for $basename-$i"
+            sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
+            sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.local/share/Steam"
+        done
+    fi
     touch ./steams
-    sudo killall steam | true
 fi
 
 if [ ! -f /opt/cathook/bin/libcathook-textmode.so ]; then
     numcpu=$(grep -c ^processor /proc/cpuinfo)
     mkdir -p build
     pushd build
-    cmake -DCMAKE_BUILD_TYPE=Release -DVisuals_DrawType="No Visuals" -DVACBypass=1 -DTextmode=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 ../cathook/
+    cmake -DCMAKE_BUILD_TYPE=Release -DVisuals_DrawType="Textmode" -DVACBypass=1 -DEnableWarnings=0 -DEnableOnlineFeatures=0 ../cathook/
     make -j$numcpu
     if ! [ -e "bin/libcathook.so" ]; then
         echo "FATAL: Build failed"
