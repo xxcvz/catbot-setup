@@ -14,11 +14,6 @@ if ! [ -d "./account-generator" ]; then
 	exit
 fi
 
-if [ ! -f "/opt/cathook/steam.profile" ]; then
-	echo "You need to run install-catbots again."
-	exit
-fi
-
 xhost +
 
 ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );

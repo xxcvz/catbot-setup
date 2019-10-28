@@ -180,10 +180,6 @@ if [ ! -d "./cathook-ipc-web-panel/logs" ]; then
     touch ./cathook-ipc-web-panel/logs/main.log
 fi
 
-if [ ! -f /opt/cathook/steam.profile ]; then
-    sudo cp ./steam.profile /opt/cathook/steam.profile
-fi
-
 echo "Installation finished. Please ensure that all navmashes are inside your map folder (https://github.com/nullworks/catbot-database)."
 echo
 echo "The web-panel and account storage can be started with ./start"
