@@ -27,7 +27,7 @@ if [ ! -x "$(command -v firejail)" ]; then
     exit
 fi
 
-if [ ! -x "$(command -v route)" ]; then
+if [ ! -x "$(command -v route)" ] && [ ! -x /sbin/route ]; then
     echo "Route doesn't exist. Please install it (net-tools on archlinux/manjaro)."
     exit
 fi
