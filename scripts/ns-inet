@@ -16,6 +16,7 @@ fi
 
 # Remove namespace if it exists.
 ip netns del $NS &>/dev/null
+ip link del ${VETH} &>/dev/null
 
 # Create namespace
 ip netns add $NS

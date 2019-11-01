@@ -3,4 +3,5 @@ count=$1
 for i in $(seq 1 $count)
 do
     ip netns delete ns$i
+    ip link del veth$i
 done

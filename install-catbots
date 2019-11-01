@@ -135,8 +135,8 @@ if [ -f ./users ] && [ ! -f ./steams ]; then
         do
             echo "Copying Steam for $basename-$i"
             if [ "$IS_GARBAGE_DISTRO" == true ]; then
-                sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
-                sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.steam/steam"
+                sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.steam /home/$basename-$i/
+                sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.steam"
             else
                 sudo -H -u $basename-$i bash -c "mkdir -p /home/$basename-$i/.local/share"
                 sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
