@@ -27,3 +27,4 @@ sudo rm /opt/cathook/bin/libcathook-textmode.so
 rm steams
 rm users
 rm kisak
+sudo rm /opt/steamapps
