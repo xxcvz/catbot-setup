@@ -60,7 +60,9 @@ basename="$(cat kisak)"
 [ -z "$basename" ] && echo "Username file empty!" && exit 1
 
 if ! [ -e "/opt/steamapps" ]; then
-    steamapps="/home/$USER/.local/share/Steam/steamapps/"
+    pushd ~/.steam/steam/steamapps
+    steamapps="$(pwd -P)"
+    popd
 
     while true; do
         read -p "Is $steamapps your steamapps directory? y/n " yn
@@ -91,19 +93,17 @@ if [ ! -f ./users ]; then
             echo $yournumber > ./users
             for i in $(seq 1 $yournumber)
             do
-                if [ -d "/home/`cat kisak`-$i" ]; then
-                    echo "`cat kisak`-$i already exists"
+                if [ -d "/home/$basename-$i" ]; then
+                    echo "$basename-$i already exists"
                     continue
                 fi
-                echo "Creating user `cat kisak`-$i"
-                sudo useradd -m `cat kisak`-$i
-                sudo usermod -g `cat kisak`s `cat kisak`-$i
-                sudo mkdir -p /home/`cat kisak`-$i
-                sudo chown `cat kisak`-$i:`cat kisak`s /home/`cat kisak`-$i
-                sudo -H -u `cat kisak`-$i bash -c "mkdir -p /home/`cat kisak`-$i/.local/share/Steam"
-                sudo -H -u `cat kisak`-$i bash -c "ln -s \"/opt/steamapps\" \"/home/`cat kisak`-$i/.local/share/Steam/steamapps\""
-                sudo -H -u `cat kisak`-$i bash -c "mkdir -p ~/.steam"
-                sudo -H -u `cat kisak`-$i bash -c "touch ~/.steam/steam_install_agreement.txt"
+                echo "Creating user $basename-$i"
+                sudo useradd -m $basename-$i
+                sudo usermod -g `cat kisak`s $basename-$i
+                sudo mkdir -p /home/$basename-$i
+                sudo chown `cat kisak`-$i:`cat kisak`s /home/$basename-$i
+                sudo -H -u $basename-$i bash -c "mkdir -p ~/.steam"
+                sudo -H -u $basename-$i bash -c "touch ~/.steam/steam_install_agreement.txt"
             done
             break
         fi
@@ -118,13 +118,30 @@ if [ -f ./users ] && [ ! -f ./steams ]; then
     read -p "Press enter if steam has reached the login screen. "
     sudo kill -9 $(pgrep -u $basename-1 steam)
 
+    if ! sudo test -x "/home/$basename-1/.local/share/Steam/steam"; then
+        echo Garbage distro detected.
+        IS_GARBAGE_DISTRO=true
+        sudo rm -r "/home/$basename-1/.steam/steam/steamapps"
+        sudo -H -u $basename-1 bash -c "ln -s \"/opt/steamapps\" \"/home/$basename-1/.steam/steam\""
+    else
+        IS_GARBAGE_DISTRO=false
+        sudo rm -r "/home/$basename-1/.local/share/Steam/steamapps"
+        sudo -H -u $basename-1 bash -c "ln -s \"/opt/steamapps\" \"/home/$basename-1/.local/share/Steam\""
+    fi
+    
     usercount=$(cat ./users)
     if [ "$usercount" -ge "2" ]; then
         for i in $(seq 2 $usercount)
         do
             echo "Copying Steam for $basename-$i"
-            sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
-            sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.local/share/Steam"
+            if [ "$IS_GARBAGE_DISTRO" == true ]; then
+                sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
+                sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.steam/steam"
+            else
+                sudo -H -u $basename-$i bash -c "mkdir -p /home/$basename-$i/.local/share"
+                sudo rsync -av --info=progress2 --info=name0 /home/$basename-1/.local/share/Steam /home/$basename-$i/.local/share
+                sudo chown -R $basename-$i:$basename-$i "/home/$basename-$i/.local/share/Steam"
+            fi
         done
     fi
     touch ./steams
