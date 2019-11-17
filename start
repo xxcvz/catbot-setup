@@ -14,6 +14,11 @@ if ! [ -d "./account-generator" ]; then
 	exit
 fi
 
+if [ ! -x "$(command -v Xvfb)" ]; then
+    echo "Xvfb doesn't exist. Please install it."
+    exit
+fi
+
 xhost +
 
 ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
@@ -34,6 +39,12 @@ else
     pushd account-generator
     node app >/tmp/cathook-accgen.log &
     popd
+fi
+if [ -e "/tmp/cat-Xvfb.pid" ] && ps -p `cat "/tmp/cat-Xvfb.pid"` >/dev/null; then
+    echo Xvfb already running.
+else
+    Xvfb :3239 +extension GLX >/dev/null &
+    echo $! > /tmp/cat-Xvfb.pid
 fi
 
 sleep 5;
