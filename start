@@ -47,6 +47,14 @@ else
     echo $! > /tmp/cat-Xvfb.pid
 fi
 
+if [ -x "$(command -v pulseaudio)" ]; then
+    echo "Starting Pulseaudio daemons"
+    for i in $(seq 1 $(cat users))
+    do
+        sudo su - $(cat kisak)-$i -c "pulseaudio --daemonize=yes"
+    done
+fi
+
 sleep 5;
 
 echo "Account generator password: `cat /tmp/cat-accgen2-password`"
