@@ -120,7 +120,7 @@ fi
 if [ -f ./users ] && [ ! -f ./steams ]; then
     xhost + >/dev/null
     echo "Starting Steam for $basename-1"
-    sudo su - $basename-1 -c "DISPLAY=:0 steam &>/tmp/steam-$basename-1.log 2>&1 &"
+    sudo su - $basename-1 -c "DISPLAY=$DISPLAY steam &>/tmp/steam-$basename-1.log 2>&1 &"
     read -p "Press enter if steam has reached the login screen. "
     sudo kill -9 $(pgrep -u $basename-1 steam)
 
