@@ -4,12 +4,11 @@
 #       This script stops all processes of steam and TF2
 #
 
-sudo kill $(cat /tmp/cat-ipc-server.pid /tmp/ncat-cathook-webpanel.pid /tmp/ncat-account-generator.pid /tmp/cat-Xvfb.pid)
+sudo kill $(cat /tmp/cat-ipc-server.pid /tmp/ncat-cathook-webpanel.pid /tmp/ncat-account-generator.pid)
 
 sudo rm /tmp/ncat-account-generator.pid
 sudo rm /tmp/ncat-cathook-webpanel.pid
 sudo rm /tmp/cat-ipc-server.pid
-sudo rm /tmp/cat-Xvfb.pid
 
 xhost -
 
