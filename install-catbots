@@ -43,7 +43,8 @@ if [ ! -x "$(command -v xhost)" ]; then
 fi
 
 if [ ! -d "./cathook" ]; then
-    git clone --recursive https://cathook.club/s/ch/git
+    URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://cathook.club/s/ch/git || echo error)"
+    git clone --recursive $URL
 fi
 
 
