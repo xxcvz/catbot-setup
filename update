@@ -45,3 +45,20 @@ popd
 pushd account-generator
 bash update.sh
 popd
+
+
+echo "Fetching navmeshes..."
+if [ -d ./catbot-database ]; then
+	pushd catbot-database
+	git fetch --depth 1
+	git reset --hard origin/master
+	popd
+else
+	git clone --depth 1 https://github.com/nullworks/catbot-database
+fi
+
+echo "Copying navmeshes..."
+rsync catbot-database/nav\ meshes/*.nav ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/
+chmod 755 ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/*.nav # fixup permissions so tf2 is happy
+
+echo "Done."
