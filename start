@@ -15,14 +15,14 @@ if ! [ -d "./user_instances" ]; then
 fi
 
 sudo mkdir -p /opt/steamapps
-sudo mount --bind ~/.local/share/Steam/steamapps/ /opt/steamapps || true
+mountpoint -q /opt/steamapps || sudo mount --bind ~/.local/share/Steam/steamapps/ /opt/steamapps
 
 ipcserver=$( ps faux | grep '/opt/cathook/ipc/bin/server' | grep -vw grep | awk '{ print $2 }' );
 [ -z "$ipcserver" ] && /opt/cathook/ipc/bin/server -s >/dev/null &
 [ -z "$ipcserver" ] && echo $! >/tmp/cat-ipc-server.pid
 
 if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webpanel.pid"` >/dev/null; then
-    echo Account generator already running.
+    echo IPC panel already running.
 else
     pushd cathook-ipc-web-panel
     sudo STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
