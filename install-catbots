@@ -110,6 +110,8 @@ if [ ! -d "./cathook-ipc-web-panel/logs" ]; then
     touch ./cathook-ipc-web-panel/logs/main.log
 fi
 
+sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config
+
 echo "Installation finished. Please ensure that all navmashes are inside your map folder (see https://github.com/nullworks/cathook/catbot-database)."
 echo
 echo "The web-panel and account storage can be started with ./start"
