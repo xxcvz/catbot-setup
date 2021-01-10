@@ -93,7 +93,7 @@ fi
 if [ ! -d "./account-generator" ]; then
     git clone --recursive https://github.com/nullworks/account-generator
     pushd account-generator
-    ./install.sh
+    ./update.sh
     popd
 fi
 
