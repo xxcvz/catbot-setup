@@ -12,6 +12,12 @@ if ! [ -e "/opt/cathook/" ]; then
     exit
 fi
 
+# Idiot proof this shit
+if ! [ -d ".git" ]; then
+    echo "You must clone the repo instead of downloading it."
+    exit
+fi
+
 if [ ! -x "$(command -v touch)" ]; then
     echo "Touch doesn't exist. Please install it. (touch)"
     exit
