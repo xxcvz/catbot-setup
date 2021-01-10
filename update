@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+OLD_UPDATE=$(git rev-parse HEAD:update)
+git pull --ff
+NEW_UPDATE=$(git rev-parse HEAD:update)
+
+if [ $OLD_UPDATE != $NEW_UPDATE ]; then
+    echo Update script self update!
+    exec $0 $@
+fi
+
 function updateRepoURL() {
     local URL="$(curl --max-time 10 -Ls -o /dev/null -w %{url_effective} https://cathook.club/s/ch/git || echo error)"
     local GIT_REMOTE=$(git config --get remote.origin.url || echo unknown)
@@ -9,7 +18,6 @@ function updateRepoURL() {
     fi
 }
 
-git pull
 pushd cathook
 
 GIT_REMOTE=$(git config --get remote.origin.url || echo unknown)
@@ -18,7 +26,7 @@ if [ "$GIT_REMOTE" == "https://github.com/nullworks/cathook.git" ] || [ "$GIT_RE
 fi
 
 
-git pull
+git pull --ff
 git submodule update --init --recursive
 popd
 mkdir -p build

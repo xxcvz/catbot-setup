@@ -107,7 +107,7 @@ fi
 if [ ! -d "./cathook-ipc-web-panel" ]; then
     git clone --recursive https://github.com/nullworks/cathook-ipc-web-panel
     pushd cathook-ipc-web-panel
-    ./install.sh
+    ./update.sh
     popd
 fi
 
