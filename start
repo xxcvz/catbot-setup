@@ -14,6 +14,11 @@ if ! [ -d "./user_instances" ]; then
 	exit
 fi
 
+if ! [ -d "./nullnexus-proxy" ]; then
+    echo "You need to run install-catbots in order to install the nullnexus proxy server first."
+    exit
+fi
+
 sudo mkdir -p /opt/steamapps
 mountpoint -q /opt/steamapps || sudo mount --bind ~/.steam/steam/steamapps/ /opt/steamapps
 
@@ -26,6 +31,14 @@ if [ -e "/tmp/ncat-cathook-webpanel.pid" ] && ps -p `cat "/tmp/ncat-cathook-webp
 else
     pushd cathook-ipc-web-panel
     sudo PATH="$PATH" STEAM_LD_PRELOAD="$(cd ../ && pwd)/just-disable-vac/build/bin64/libvpcfs.so.0:$(cd ../ && pwd)/just-disable-vac/build/bin32/libvpcfs.so.0" bash ./run.sh &
+    popd
+fi
+
+if [ -e "/tmp/nnullnexus-proxy.pid" ] && ps -p `cat "/tmp/nnullnexus-proxy.pid"` >/dev/null; then
+    echo Nullnexus proxy already running.
+else
+    pushd nullnexus-proxy
+    PATH="$PATH" bash ./run.sh &
     popd
 fi
 

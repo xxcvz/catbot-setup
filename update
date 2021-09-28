@@ -47,6 +47,11 @@ git remote set-url origin https://github.com/nullworks/cathook-ipc-server
 bash update.sh
 popd
 
+pushd nullnexus-proxy
+git remote set-url origin https://gitlab.com/nullworks/cathook/nullnexus-proxy
+bash update.sh
+popd
+
 pushd cathook-ipc-web-panel
 git remote set-url origin https://github.com/nullworks/cathook-ipc-web-panel
 bash update.sh

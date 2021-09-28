@@ -107,6 +107,13 @@ if [ ! -d "./cathook-ipc-web-panel" ]; then
     popd
 fi
 
+if [ ! -d "./nullnexus-proxy" ]; then
+    git clone --recursive https://gitlab.com/nullworks/cathook/nullnexus-proxy
+    pushd nullnexus-proxy
+    ./update.sh
+    popd
+fi
+
 if [ ! -d "./cathook-ipc-web-panel/logs" ]; then
     mkdir -p ./cathook-ipc-web-panel/logs
     touch ./cathook-ipc-web-panel/logs/main.log
