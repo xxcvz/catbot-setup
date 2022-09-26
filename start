@@ -34,13 +34,10 @@ else
     popd
 fi
 
-if [ -e "/tmp/nnullnexus-proxy.pid" ] && ps -p `cat "/tmp/nnullnexus-proxy.pid"` >/dev/null; then
-    echo Nullnexus proxy already running.
-else
-    pushd nullnexus-proxy
-    PATH="$PATH" bash ./run.sh &
-    popd
-fi
+pushd nullnexus-proxy
+PATH="$PATH" pm2 start index.js
+popd
+
 
 if [ -x "$(command -v pulseaudio)" ]; then
     echo "Setting up Pulseaudio socket"
