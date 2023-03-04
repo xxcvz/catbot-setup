@@ -10,6 +10,9 @@
 
 [ -f /tmp/ncat-cathook-webpanel.pid ] && sudo rm /tmp/ncat-cathook-webpanel.pid
 [ -f /tmp/nnullnexus-proxy.pid ] && sudo rm /tmp/nnullnexus-proxy.pid
+pushd nullnexus-proxy
+PATH="$PATH" pm2 stop index.js
+popd
 [ -f /tmp/cat-ipc-server.pid ] && sudo rm /tmp/cat-ipc-server.pid
 [ -f /tmp/pulsemodule.id ] && pactl unload-module $(cat /tmp/pulsemodule.id) && rm /tmp/pulsemodule.id
 
