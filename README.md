@@ -19,3 +19,12 @@ Fedora/Centos
 
 Arch/Manjaro (High Support)
 `sudo pacman -Syu nodejs npm firejail net-tools xorg-xhost`
+
+`xorg-server-xvfb` Is also reqiured for this fork due to unknown reasons why steam will not open unless you use it.
+
+While starting bots, make sure that only ONE IS STARTING AT A TIME OTHERWISE THEY WILL NOT START
+For whatever reason, more than one starting will cause them not to start at all
+
+You will also never see the popup for steam or tf2, but a good way to make sure its working is looking in `cathook-ipc-web-panel/logs` OR watching the bot state until it goes to RUNNING
+
+Confirmed to be working on Arch Linux.
