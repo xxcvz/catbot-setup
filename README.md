@@ -20,7 +20,8 @@ Fedora/Centos
 Arch/Manjaro (High Support)
 `sudo pacman -Syu nodejs npm firejail net-tools xorg-xhost`
 
-`xorg-server-xvfb` Is also reqiured for this fork due to unknown reasons why steam will not open unless you use it.
+`xorg-server-xvfb` Is also recommended for this fork due to unknown reasons why steam will not open unless you use it.
+If steam works perfectly fine, ignore this.
 
 While starting bots, make sure that only ONE IS STARTING AT A TIME OTHERWISE THEY WILL NOT START
 For whatever reason, more than one starting will cause them not to start at all
