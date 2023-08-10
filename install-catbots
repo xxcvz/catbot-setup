@@ -45,7 +45,7 @@ fi
 ./remove-legacy
 
 if [ ! -d "./cathook" ]; then
-    git clone --recursive https://github.com/gishxyz/cathook
+    git clone --recursive https://github.com/cowhookdev/cathook.git
 fi
 pushd cathook/external/
 if [ ! -e boost-cmake ]; then
