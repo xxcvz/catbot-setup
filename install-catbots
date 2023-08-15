@@ -112,7 +112,7 @@ if [ ! -d "./cathook-ipc-server" ]; then
 fi
 
 if [ ! -d "./cathook-ipc-web-panel" ]; then
-    git clone --recursive https://github.com/gishxyz/cathook-ipc-web-panel
+    git clone --recursive https://github.com/rosne-gamingyt/cathook-ipc-web-panel.git
     pushd cathook-ipc-web-panel
     ./update.sh
     popd
