@@ -7,7 +7,8 @@ if [ $EUID == 0 ]; then
 fi
 
 if ! [ -e "/opt/cathook/" ]; then
-    echo "You don't have cathook installed."
+    echo "Please install Cathook on your main TF2, first."
+    echo "https://cathook.club/s/ch/git"
     exit
 fi
 
@@ -42,10 +43,10 @@ if [ ! -x "$(command -v pgrep)" ]; then
     exit
 fi
 
+./remove-legacy
 
 if [ ! -d "./cathook" ]; then
-    URL="https://github.com/explowz/cathook.git" # make user choose from which fork to install
-    git clone --recursive $URL
+    git clone --recursive https://github.com/cowhookdev/cathook.git
 fi
 
 if [ -d ~/.steam/steam/steamapps/common/Team\ Fortress\ 2/tf/maps/ ]; then
@@ -92,20 +93,19 @@ if [ ! -d "./just-disable-vac" ]; then
 fi
 
 if [ ! -d "./cathook-ipc-server" ]; then
-    git clone --recursive https://github.com/qtTF2/cathook-ipc-server # b4 any fuck up by ch devs
+    git clone --recursive https://github.com/rosne-gamingyt/cathook-ipc-server
     pushd cathook-ipc-server
     ./install.sh
     popd
 fi
 
 if [ ! -d "./cathook-ipc-web-panel" ]; then
-    git clone --recursive https://github.com/rosne-gamingyt/cathook-ipc-web-panel.git
+    git clone --recursive https://github.com/nullworks/cathook-ipc-web-panel
     pushd cathook-ipc-web-panel
     ./update.sh
     popd
 fi
 
-#bloatware
 if [ ! -d "./nullnexus-proxy" ]; then
     sudo npm i -g pm2
     git clone --recursive https://gitlab.com/nullworks/cathook/nullnexus-proxy
@@ -121,8 +121,9 @@ fi
 
 sudo sed -i 's/^restricted-network yes/# restricted-network yes/g' /etc/firejail/firejail.config
 
-echo "Installation has finished. Please ensure that all navmeshes are inside your maps folder (see https://github.com/nullworks/cathook/catbot-database)."
+echo "Installation finished. Please ensure that all navmeshes are inside your maps folder (see https://github.com/nullworks/cathook/catbot-database)."
 echo
 echo "The web panel can be started with ./start"
 echo
+echo "Accgen is broken due to recent reCAPTCHA updates, as well as us running out of accounts to provide. You must create your own list of accounts to use for catbots."
 echo "Create a list of steam accounts, and save them to catbot-setup/accounts.txt in username:password format."
